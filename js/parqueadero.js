@@ -2,12 +2,93 @@ let placasRegistradas = []; // Para almacenar las placas registradas
 let tiposvehiculoRegistradas = []; // Para almacenar las placas registradas
 let horaIngreso = []; // Para almacenar la hora de ingreso para cada placa
 
-let registraPLaca = document.getElementById('registrarPlaca')
-registrarPlaca.onclick = function () {
+let localStorageEliminar = document.getElementById('eliminarlocalstorage')
+localStorageEliminar.onclick = function () {
 
+	if (confirm('Seguro quieres eliminar todos los registros?')) {
+		localStorage.clear();
+		location.reload();
+	}
+
+}
+// ---------------------- 👇👇 Guardar y recuperar los datos del localStorage 👇👇 ------------------------ 
+// Función para cargar los datos almacenados en el localStorage al cargar la página
+function cargarDatosAlmacenados() {
+	let placasRegistradasStorage = localStorage.getItem('placasRegistradas');
+	let tiposvehiculoRegistradasStorage = localStorage.getItem('tiposvehiculoRegistradas');
+	let horaIngresoStorage = localStorage.getItem('horaIngreso');
+
+	if (placasRegistradasStorage && tiposvehiculoRegistradasStorage && horaIngresoStorage) {
+		placasRegistradas = JSON.parse(placasRegistradasStorage);
+		tiposvehiculoRegistradas = JSON.parse(tiposvehiculoRegistradasStorage);
+		horaIngreso = JSON.parse(horaIngresoStorage).map(timestamp => new Date(timestamp));
+	}
+}
+
+// Función para guardar los datos en el localStorage
+function guardarDatosEnAlmacenamiento() {
+	localStorage.setItem('placasRegistradas', JSON.stringify(placasRegistradas));
+	localStorage.setItem('tiposvehiculoRegistradas', JSON.stringify(tiposvehiculoRegistradas));
+	localStorage.setItem('horaIngreso', JSON.stringify(horaIngreso));
+}
+
+// Cargar los datos almacenados al cargar la página
+window.addEventListener('load', function () {
+	cargarDatosAlmacenados();
+	mostrarDatosRegistrados();
+});
+
+function mostrarDatosRegistrados() {
+	let mostrarplacasHTML = '';
+	let mostrarhoraHTML = '';
+	let mostrartiempoHTML = '';
+	let mostrartipovehiculoHTML = '';
+
+	for (let i = 0; i < placasRegistradas.length; i++) {
+		mostrarplacasHTML += '<strong>' + placasRegistradas[i] + '</strong><br><br>';
+		mostrarhoraHTML += '<strong>' + obtenerHoraIngreso(i) + '</strong><br><br>';
+		mostrartiempoHTML += '<strong>' + obtenerTiempoTranscurrido(i) + '</strong><br><br>';
+		mostrartipovehiculoHTML += '<strong>' + tiposvehiculoRegistradas[i] + '</strong><br><br>';
+	}
+
+	document.getElementById('placasIngresadas').innerHTML = mostrarplacasHTML;
+	document.getElementById('horaIngreso').innerHTML = mostrarhoraHTML;
+	document.getElementById('tiempoEnElParqueadero').innerHTML = mostrartiempoHTML;
+	document.getElementById('tipoVehiculo').innerHTML = mostrartipovehiculoHTML;
+}
+
+function obtenerHoraIngreso(indice) {
+	let timestamp = horaIngreso[indice];
+	let fecha = new Date(timestamp);
+	let hora = fecha.getHours();
+	let minutos = fecha.getMinutes();
+	let horaCompleta = hora + ':' + minutos.toString().padStart(2, '0');
+	return horaCompleta;
+}
+
+function obtenerTiempoTranscurrido(indice) {
+	let tiempoActual = new Date();
+	let tiempoTranscurrido = tiempoActual - horaIngreso[indice];
+	let minutosTranscurridos = Math.floor(tiempoTranscurrido / (1000 * 60));
+	let horasTranscurridas = Math.floor(minutosTranscurridos / 60);
+	minutosTranscurridos %= 60;
+
+	let tiempoFormateado = horasTranscurridas + ' Hrs, ' + minutosTranscurridos + ' M';
+	return tiempoFormateado;
+}
+// ---------------------- 👆👆 Guardar y recuperar los datos del localStorage 👆👆  ------------------------ 
+
+
+let registrarPlaca = document.getElementById('registrarPlaca');
+registrarPlaca.onclick = function () {
 	let placasCapturadasInput = document.getElementById('camporegistrarplaca').value.toUpperCase();
 
 	if (placasCapturadasInput) {
+		if (placasRegistradas.includes(placasCapturadasInput)) { // Comprar si la placa no existe en el arreglo
+			alert('La placa ' + placasCapturadasInput + ' ya ha sido registrada antes');
+			return; // Salir de la función si la placa ya existe
+		}
+
 		placasRegistradas.push(placasCapturadasInput); // Agregar las placas al arreglo
 
 		let mostrarplacasHTML = '';
@@ -21,17 +102,20 @@ registrarPlaca.onclick = function () {
 		horaIngreso.push(tiempoIngreso);
 
 		horaIngresoAlParqueadero(); // Llamar la función para mostrar la hora de ingreso
-		setInterval(mostrarTiempoTranscurrido, 1000); // Actualizar cada segundo desde la hora del ingreso
-		registrartipoVehiculo() //Llamar la funcion de registrar tipo de vehiculo
-	}
-	else {
-		alert('El campo registrar placa esta vacio');
-	}
+		mostrarTiempoTranscurrido(); // Llamar la función para que salga de una vez el tiempo y no quede en blanco
+		setInterval(mostrarTiempoTranscurrido, 60000); // Actualizar cada minuto desde la hora del ingreso
+		registrartipoVehiculo(); // Llamar la función de registrar tipo de vehiculo
 
-
+		guardarDatosEnAlmacenamiento(); // Guaradar en localStorage
+		mostrarDatosRegistrados(); // Guaradar en localStorage
+		window.scrollBy(0, window.innerHeight);
+	} else {
+		alert('El campo registrar placa está vacío');
+	}
 }
 
 
+//Registrar el tipo de vehiculo
 function registrartipoVehiculo() {
 	let tipoVehiculo = document.getElementById('tipovehiculoregistrado').value.toUpperCase();
 	tiposvehiculoRegistradas.push(tipoVehiculo)
@@ -42,12 +126,15 @@ function registrartipoVehiculo() {
 		document.getElementById('tipoVehiculo').innerHTML = mostrartipovehiculoHTML;
 	}
 	document.getElementById('tipovehiculoregistrado').value = "";
+	guardarDatosEnAlmacenamiento(); // Guaradar en localStorage
+	mostrarDatosRegistrados(); // Guaradar en localStorage
 }
 
 
 // Para mostrar la hora de ingreso al registrar una nueva placa
 function horaIngresoAlParqueadero() {
 	let mostrarhoraHTML = '';
+
 	for (let i = 0; i < horaIngreso.length; i++) {
 		let fecha = horaIngreso[i]; // Obtener la el array en una variable
 		let hora = fecha.getHours();
@@ -61,6 +148,8 @@ function horaIngresoAlParqueadero() {
 		mostrarhoraHTML += '<strong>' + horaCompleta + '</strong><br><br>';
 		document.getElementById('horaIngreso').innerHTML = mostrarhoraHTML;
 	}
+	guardarDatosEnAlmacenamiento(); // Guaradar en localStorage
+	mostrarDatosRegistrados(); // Guaradar en localStorage
 }
 
 
@@ -84,6 +173,9 @@ function mostrarTiempoTranscurrido() {
 	}
 
 	document.getElementById('tiempoEnElParqueadero').innerHTML = mostrarhoraHTML;
+
+	guardarDatosEnAlmacenamiento(); // Guaradar en localStorage
+	mostrarDatosRegistrados(); // Guaradar en localStorage
 }
 
 
@@ -133,6 +225,11 @@ btnEliminar.onclick = function () {
 			// Actualizar la visualización del tiempo transcurrido
 			mostrarTiempoTranscurrido();
 			document.getElementById('campoeliminarplaca').value = "";
+
+			guardarDatosEnAlmacenamiento(); // Guaradar en localStorage
+			mostrarDatosRegistrados(); // Guaradar en localStorage
+			window.scrollBy(0, window.innerHeight);
+
 		}
 	}
 	else {

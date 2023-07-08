@@ -123,6 +123,28 @@ section {
 
 @media (max-width: 600px) {
 	section {
-		grid-template-columns: 1fr;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		max-width: 98%;
+		min-width: 320px;
+		background-color: #f2f2f2;
+	}
+	h2{
+		font-size: 18px;
+		text-align: left;
+	}
+	.columna{
+		font-size: 14px;
+		text-align: left;
+	}
+	.buscarinfo{
+		width: 55%;
+		margin-left: 27%;
+	}
+	body{
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		max-width: 98%;
+		min-width: 320px;
 	}
 }

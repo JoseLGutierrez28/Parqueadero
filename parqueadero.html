@@ -11,94 +11,55 @@
 </head>
 
 <body>
-	<div class="contenido">
 
+	<div class="contenido">
 		<div class="informacion">
 			<h1>Parqueadero Multi Pueblo</h1>
 
 			<label for="">Entrada por vehículo</label>
-			<input type="text" name="" id="">
-			<button>Registrar</button>
+			<input type="text" name="" id="camporegistrarplaca" placeholder="Ingresa la placa del vehículo">
+
+			<label for="">Tipo de vehiculo</label>
+			<select name="" id="tipovehiculoregistrado">
+				<option value="">Selecciona</option>
+				<option value="moto">Moto</option>
+				<option value="carro">Carro</option>
+			</select>
+
+			<button id="registrarPlaca">Registrar</button>
+
+			<label for="">Eliminar placa</label>
+			<input type="text" name="" id="campoeliminarplaca" placeholder="Ingresa la placa del vehículo">
+			<button class="buttondelete" id="eliminarPlaca">Eliminar</button>
 
 		</div>
-
-		<!-- <div class="w-100 h-10">
-
-			<h1 class="text ">Parqueadero Multi Pueblo</h1>
-		</div>
-
-
-		<div class="w-100 h-10">
-			<br>
-			<div class="text col">
-				<label>entrada vehiculo por placa</label>
-			</div>
-			<div class="text">
-				<input type="text" id="ev">
-			</div>
-		</div>
-
-
-		<div class="w-100 h-10">
-			<br>
-			<div class="text col">
-				<input class="bot" type="button" id="btn" value="Registrar" onclick="guardar.capturar()">
-			</div>
-
-			<div class="text">
-				<br>
-				<input type="text" id="ya">
-			</div>
-
-			<div class="text col">
-				<input class="bot" type="button" id="btn" value="Consultar" onclick="salida()">
-			</div>
-
-			<div class="text cool">
-				<div>
-					<br>
-					<input type="text" id="si">
-				</div>
-				<br>
-				<input class="bot" type="button" id="btn" value="Eliminar" onclick="eliminar()">
-			</div>
-
-		</div>
-
-		<div class="w-100 h-10">
-			<div class="text col">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<label>total vehiculos ingresados</label>
-			</div>
-			<div class="text col">
-				<output id="tv"></output>
-			</div>
-		</div>
-
-
-
-		<div class="w-100 h-60">
-			<div class="text col">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-				<label>lista de las placas</label>
-			</div>
-
-			<div class="text col">
-				<div id="nose"></div>
-			</div>
-		</div>-->
 	</div>
 
+	<section>
 
-	<script src="js/parqueadero.js"></script>
+		<div class="columna">
+			<h2>Hora</h2>
+			<div id="horaIngreso"></div>
+		</div>
+
+		<div class="columna">
+			<h2>Placa</h2>
+			<div id="placasIngresadas"></div>
+		</div>
+
+		<div class="columna">
+			<h2>Tiempo</h2>
+			<div id="tiempoEnElParqueadero"></div>
+		</div>
+
+		<div class="columna">
+			<h2>Vehiculo</h2>
+			<div id="tipoVehiculo"></div>
+		</div>
+
+	</section>
+
+	<script src="./js/parqueadero.js"></script>
 </body>
 
 </html>

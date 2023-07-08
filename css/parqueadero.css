@@ -37,9 +37,10 @@ h1 {
 	text-align: center;
 }
 
-h2{
+h2 {
 	color: brown;
 	margin-bottom: 16px;
+	text-align: center;
 }
 
 label {
@@ -48,11 +49,12 @@ label {
 	margin-top: 12px;
 }
 
-strong{
+strong {
 	margin-bottom: 4px;
 }
 
-input, select {
+input,
+select {
 	width: 80%;
 	height: 100%;
 	padding: 2%;
@@ -85,11 +87,12 @@ button {
 }
 
 section {
+	margin: 30px auto;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	max-width: 90%;
-	margin: 0 auto;
 	background-color: #f2f2f2;
+
 }
 
 .columna {
@@ -97,6 +100,25 @@ section {
 	padding: 10px;
 	color: black;
 	text-align: center;
+}
+
+.buscarinfo {
+	margin-left: 75%;
+	width: 25%;
+}
+
+.advertencia {
+	color: red;
+	display: none;
+	margin-top: 4px;
+}
+
+.principal,
+.resultadoHora,
+.resultadoPlaca,
+.resultadosTiempo,
+.resultadosTipoV {
+	display: none;
 }
 
 @media (max-width: 600px) {

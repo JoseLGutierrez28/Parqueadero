@@ -141,4 +141,81 @@ btnEliminar.onclick = function () {
 };
 
 
+// Funcion que sirve paara filtrar o buscar por placa
+let buscarPlacaInput = document.getElementById('buscarplaca');
+buscarPlacaInput.addEventListener('input', function () {
+	let filtroPlaca = buscarPlacaInput.value.toUpperCase();
+
+	let mostrarhora = [];
+	let mostrarplacas = [];
+	let mostrartiempo = [];
+	let mostrartipovehiculo = [];
+
+	for (let i = 0; i < placasRegistradas.length; i++) {
+		if (placasRegistradas[i].includes(filtroPlaca)) {
+			let fecha = horaIngreso[i];
+			let hora = fecha.getHours();
+			let minutos = fecha.getMinutes();
+			let horaCompleta = hora + ':' + minutos.toString().padStart(2, '0');
+
+			let tiempoTranscurrido = new Date() - horaIngreso[i]; // Diferencia en milisegundos
+
+			let segundos = Math.floor(tiempoTranscurrido / 1000);
+			let minutosTranscurridos = Math.floor(segundos / 60);
+			let horasTranscurridas = Math.floor(minutosTranscurridos / 60);
+
+			minutosTranscurridos %= 60;
+			horasTranscurridas %= 24;
+
+			let tiempoFormateado = `${horasTranscurridas} Hrs, ${minutosTranscurridos} M`;
+
+			mostrarhora.push(horaCompleta);
+			mostrarplacas.push(placasRegistradas[i]);
+			mostrartiempo.push(tiempoFormateado);
+			mostrartipovehiculo.push(tiposvehiculoRegistradas[i]);
+		}
+	}
+
+	let resultadoHoraIngreso = document.getElementById('resultadohoraIngreso');
+	let resultadoPlacasIngresadas = document.getElementById('resultadoplacasIngresadas');
+	let resultadoTiempoEnElParqueadero = document.getElementById('resultadotiempoEnElParqueadero');
+	let resultadoTipoVehiculo = document.getElementById('resultadotipoVehiculo');
+
+	// Vaciar los elementos HTML antes de asignar nuevos valores, no se puede direcatmente en las variables
+	resultadoHoraIngreso.innerHTML = '';
+	resultadoPlacasIngresadas.innerHTML = '';
+	resultadoTiempoEnElParqueadero.innerHTML = '';
+	resultadoTipoVehiculo.innerHTML = '';
+
+	if (filtroPlaca && mostrarplacas.length > 0) {
+		// Mostrar los resultados solo si hay coincidencias y se ingresó un filtro de búsqueda
+		resultadoHoraIngreso.innerHTML = mostrarhora.join('<br>');
+		resultadoPlacasIngresadas.innerHTML = mostrarplacas.join('<br>');
+		resultadoTiempoEnElParqueadero.innerHTML = mostrartiempo.join('<br>');
+		resultadoTipoVehiculo.innerHTML = mostrartipovehiculo.join('<br>');
+	}
+
+	const resultadosStyle = (filtroPlaca && mostrarplacas.length > 0) ? 'block' : 'none';
+	document.querySelector('.advertencia').style.display = resultadosStyle;
+	document.querySelector('.resultadoHora').style.display = resultadosStyle;
+	document.querySelector('.resultadoPlaca').style.display = resultadosStyle;
+	document.querySelector('.resultadosTiempo').style.display = resultadosStyle;
+	document.querySelector('.resultadosTipoV').style.display = resultadosStyle;
+
+	let mensajeAdvertencia = document.getElementById('mensajeAdvertencia');
+
+	if (filtroPlaca && mostrarplacas.length === 0) {
+		mensajeAdvertencia.style.display = 'block';
+	} else {
+		mensajeAdvertencia.style.display = 'none';
+	}
+});
+
+
+
+
+
+
+
+
 

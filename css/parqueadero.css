@@ -16,7 +16,7 @@ body {
 .contenido {
 	width: 90%;
 	background-position: center bottom -24px;
-	background-image: url('../imagen/imageParking.jpg');
+	background-image: url('../imagen/imageParking.webp');
 	background-size: cover;
 	border: double 24px;
 	margin: 2% 5%;

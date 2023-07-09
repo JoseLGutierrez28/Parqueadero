@@ -73,7 +73,7 @@ function obtenerTiempoTranscurrido(indice) {
 	let horasTranscurridas = Math.floor(minutosTranscurridos / 60);
 	minutosTranscurridos %= 60;
 
-	let tiempoFormateado = horasTranscurridas + ' Hrs, ' + minutosTranscurridos + ' M';
+	let tiempoFormateado = horasTranscurridas + ' Hs, ' + minutosTranscurridos + ' M';
 	return tiempoFormateado;
 }
 // ---------------------- 👆👆 Guardar y recuperar los datos del localStorage 👆👆  ------------------------ 
@@ -168,7 +168,7 @@ function mostrarTiempoTranscurrido() {
 		minutos %= 60;
 		horas %= 24;
 
-		let tiempoFormateado = `${horas} Hrs, ${minutos} M`;
+		let tiempoFormateado = `${horas} Hs, ${minutos} M`;
 		mostrarhoraHTML += '<strong>' + tiempoFormateado + '</strong><br><br>';
 	}
 
@@ -264,7 +264,7 @@ buscarPlacaInput.addEventListener('input', function () {
 			minutosTranscurridos %= 60;
 			horasTranscurridas %= 24;
 
-			let tiempoFormateado = `${horasTranscurridas} Hrs, ${minutosTranscurridos} M`;
+			let tiempoFormateado = `${horasTranscurridas} Hs, ${minutosTranscurridos} M`;
 
 			mostrarhora.push(horaCompleta);
 			mostrarplacas.push(placasRegistradas[i]);

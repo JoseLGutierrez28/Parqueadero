@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Parqueadero</title>
+    <link rel="stylesheet" href="./css/prueba.css">
+</head>
+
+<body>
+    <h1>Parqueadero</h1>
+    <form>
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" required>
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="">Selecciona</option>
+            <option value="Moto">Moto</option>
+            <option value="Carro">Carro</option>
+        </select>
+        <button type="submit">Registrar</button>
+    </form>
+
+    <br>
+    <label for="buscar">Buscar placa:</label>
+    <input type="text" id="buscar" name="buscar">
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Hora</th>
+                <th>Tiempo</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="placas">
+        </tbody>
+    </table>
+
+    <script src="./js/prueba.js"></script>
+</body>
+
+</html>

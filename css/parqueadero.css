@@ -15,7 +15,7 @@ body {
 
 .contenido {
 	width: 90%;
-	background-position: center bottom -24px;
+	background-position: center bottom -52px;
 	background-image: url('../imagen/imageParking.webp');
 	background-size: cover;
 	border: double 24px;
@@ -25,7 +25,7 @@ body {
 	justify-content: center;
 }
 
-.informacion {
+form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -37,26 +37,16 @@ h1 {
 	text-align: center;
 }
 
-h2 {
-	color: brown;
-	margin-bottom: 16px;
-	text-align: center;
-}
-
 label {
 	font-size: 26px;
 	margin-bottom: 20px;
 	margin-top: 12px;
-}
-
-strong {
-	margin-bottom: 4px;
+	text-align: center;
 }
 
 input,
 select {
 	width: 80%;
-	height: 100%;
 	padding: 2%;
 	border-color: #0072ff;
 	text-align: center;
@@ -86,26 +76,39 @@ button {
 	margin-bottom: 24px;
 }
 
-section {
-	margin: 30px auto;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	max-width: 90%;
-	background-color: #f2f2f2;
-
-}
-
-.columna {
-	background-color: #f2f2f2;
-	padding: 10px;
-	color: black;
-	text-align: center;
-}
-
 .buscarinfo {
-	margin-left: 75%;
+	margin-left: auto;
 	width: 25%;
-}
+
+  }
+
+.contenidotabla {
+	margin: 28px auto;
+	margin-top: 28px;
+	background-color: white;
+	width: 90%;
+	display: flex;
+	justify-content: flex-end;
+  }
+  
+  table {
+	width: 100%;
+	border-collapse: collapse;
+  }
+  
+  th {
+	background-color: #f2f2f2;
+	color: brown;
+	text-align: center;
+	padding: 12px;
+  }
+  
+  td {
+	text-align: center;
+	padding: 4px;
+	border-bottom: 1px solid #ddd;
+	color: black;
+  }
 
 .advertencia {
 	color: red;
@@ -113,38 +116,21 @@ section {
 	margin-top: 4px;
 }
 
-.principal,
-.resultadoHora,
-.resultadoPlaca,
-.resultadosTiempo,
-.resultadosTipoV {
-	display: none;
-}
-
 @media (max-width: 600px) {
-	section {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		max-width: 98%;
-		min-width: 320px;
-		background-color: #f2f2f2;
-	}
-	h2{
-		font-size: 18px;
-		text-align: left;
-	}
-	.columna{
-		font-size: 14px;
-		text-align: left;
-	}
-	.buscarinfo{
+	.buscarinfo {
 		width: 55%;
-		margin-left: 27%;
+		margin-right: 60px;
+		margin-top: 17px;
 	}
-	body{
+
+	body {
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
 		max-width: 98%;
 		min-width: 320px;
+	}
+
+	.contenidotabla{
+		width: 100%;
 	}
 }

@@ -13,82 +13,50 @@
 <body>
 
 	<div class="contenido">
-		<div class="informacion">
-			<h1>Parqueadero Multi Pueblo</h1>
+		<h1>Parqueadero Multi Pueblo</h1>
 
-			<label for="">Entrada por vehículo</label>
-			<input type="text" name="" id="camporegistrarplaca" placeholder="Ingresa la placa">
+		<form>
 
-			<label for="">Tipo de vehiculo</label>
-			<select name="" id="tipovehiculoregistrado">
+			<label for="registrarplaca">Entrada por vehículo</label>
+			<input type="text" id="registrarplaca" name="placa" placeholder="Ingresa la placa" required autocomplete="off">
+
+			<label for="registrartipovehiculo">Tipo de vehiculo</label>
+			<select id="registrartipovehiculo" name="tipo">
 				<option value="">Selecciona</option>
-				<option value="moto">Moto</option>
-				<option value="carro">Carro</option>
+				<option value="Moto">Moto</option>
+				<option value="Carro">Carro</option>
 			</select>
 
-			<button id="registrarPlaca">Registrar</button>
+			<button type="submit">Registrar</button>
 
-			<label for="">Eliminar placa</label>
-			<input type="text" name="" id="campoeliminarplaca" placeholder="Ingresa la placa">
-			<button class="buttondelete" id="eliminarPlaca">Eliminar</button>
+		</form>
 
-		</div>
 	</div>
 
-	<section>
-		<div class="columna resultadoHora">
-			<h2>Hora</h2>
-			<div id="resultadohoraIngreso"></div>
-		</div>
-
-		<div class="columna resultadoPlaca">
-			<h2>Placa</h2>
-			<div id="resultadoplacasIngresadas"></div>
-		</div>
-
-		<div class="columna resultadosTiempo">
-			<h2>Tiempo</h2>
-			<div id="resultadotiempoEnElParqueadero"></div>
-		</div>
-
-		<div class="columna resultadosTipoV">
-			<h2>Vehiculo</h2>
-			<div id="resultadotipoVehiculo"></div>
-		</div>
-	</section>
 
 	<div class="buscarinfo">
-		<input type="text" name="" id="buscarplaca" placeholder="Buscar placa"><br>
-		<span class="advertencia" id="mensajeAdvertencia">Esta placa no existe</span>
+		<input type="text" name="" id="buscarplaca" placeholder="Buscar placa" autocomplete="off">
+		<span class="advertencia" id="mensajeAdvertencia">Esta placa no esta registrada</span>
 	</div>
 
-	<section>
-		<div class="columna">
-			<h2>Hora</h2>
-			<div id="horaIngreso"></div>
-		</div>
 
-		<div class="columna">
-			<h2>Placa</h2>
-			<div id="placasIngresadas"></div>
-		</div>
-
-		<div class="columna">
-			<h2>Tiempo</h2>
-			<div id="tiempoEnElParqueadero"></div>
-		</div>
-
-		<div class="columna">
-			<h2>Vehiculo</h2>
-			<div id="tipoVehiculo"></div>
-		</div>
-	</section>
-
-	<div class="informacion">
-		<button class="buttondelete" id="eliminarlocalstorage">Eliminar todos los registros</button>
+	<div class="contenidotabla">
+		<table>
+			<thead>
+				<tr>
+					<th>Hora</th>
+					<th>Placa</th>
+					<th>Tipo</th>
+					<th>Tiempo</th>
+					<th>Eliminar</th>
+				</tr>
+			</thead>
+			<tbody id="placas">
+			</tbody>
+		</table>
 	</div>
+
 
 	<script src="./js/parqueadero.js"></script>
 </body>
-
 </html>

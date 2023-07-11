@@ -110,12 +110,6 @@ button {
 	color: black;
   }
 
-.advertencia {
-	color: red;
-	display: none;
-	margin-top: 4px;
-}
-
 @media (max-width: 600px) {
 	.buscarinfo {
 		width: 55%;

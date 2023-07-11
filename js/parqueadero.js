@@ -45,9 +45,6 @@ function mostrarPlacas() {
 	const placasFiltradas = placasRegistradas.filter(p => p.placa.startsWith(campoBuscar.value.toUpperCase()));
 	// const placasFiltradas = placasRegistradas.filter(p => p.placa.includes(campoBuscar.value.toUpperCase())); 
 
-	// Mostrar advertencia si no hay placas registradas
-	document.querySelector('.advertencia').style.display = (placasFiltradas.length === 0) ? "block" : "none";
-
 	// Mostrar las placas registradas en la tabla
 	placasFiltradas.forEach(p => {
 
